@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>mission5-1</title>
+    </head>
+    <body>
+        <style>
+
+            .class1{
+                color: darksalmon;
+                background-color: lavenderblush;
+                font-size: 50px;
+                width: 320px;
+                height: 80px;
+                text-align:center;
+                line-height: 80px;
+            }
+            button{
+                width: 80px;
+                height: 80px;
+                font-size: 50px;
+            }
+            
+            input{
+                width: 320px;
+                height: 80px;
+                font-size: 40px;
+            }
+        </style>
+
+        <div class="class1">電卓</div>
+        
+        <input /><br>
+
+        <script>
+            function update( _v ) // input tag を更新する関数
+            {
+                document.querySelector( 'input' ).value = _v
+            }
+      
+            function append( _v ) // 数字ボタンが押されたので数字を後ろに追加する
+            {
+                document.querySelector( 'input' ).value += _v 
+            }
+
+            function calc() // ボタンが押されたので計算する
+            {
+                const v = document.querySelector( 'input' ).value
+                const f = new Function( 'return ' + v.replaceAll("×","*").replaceAll("÷","/") )
+                update( f().toString() ) 
+
+                //間違った計算をしていることを知らせる
+                if(f().toString() == Infinity ){
+                    update( "計算できません" )
+                }else{
+                    update( f().toString() )
+                }
+
+
+            }
+
+          
+
+        </script>
+        
+        <button onclick="append( '1' )" >1</button>
+        <button onclick="append( '2' )" >2</button>
+        <button onclick="append( '3' )" >3</button>
+        <button onclick="append( '+' )" >+</button><br>
+
+        <button onclick="append( '4' )" >4</button>
+        <button onclick="append( '5' )" >5</button>
+        <button onclick="append( '6' )" >6</button>
+        <button onclick="append( '-' )" >-</button><br>
+
+        <button onclick="append( '7' )" >7</button>
+        <button onclick="append( '8' )" >8</button>
+        <button onclick="append( '9' )" >9</button>
+        <button onclick="append( '×' )" >×</button><br>
+
+        <button onclick="append( '.' )" >.</button>
+        <button onclick="append( '0' )" >0</button>
+        <button onclick="calc()" >=</button>
+        <button onclick="append( '÷' )" >÷</button>
+        <button onclick="update( '' )" >C</button><br>
+        
+        
+
+    </body>
+
+</html>
